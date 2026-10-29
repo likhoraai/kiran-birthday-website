@@ -480,5 +480,36 @@ footer .script{font-size:26px;color:var(--pink);display:block;margin-bottom:4px}
   });
 })();
 </script>
+
+<style>
+#pin-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#3d0a1e,#6d1132 55%,#8a6d1f);font-family:Georgia,serif;padding:20px}
+#pin-gate .card{background:rgba(255,248,240,.97);border-radius:24px;padding:36px 28px;max-width:340px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+#pin-gate .lock{font-size:52px}
+#pin-gate h2{color:#6d1132;margin:10px 0 4px;font-size:24px}
+#pin-gate p{color:#7a5a3a;margin:0 0 18px;font-size:15px}
+#pin-gate input{width:100%;box-sizing:border-box;font-size:26px;letter-spacing:12px;text-align:center;padding:12px;border:2px solid #d9a441;border-radius:14px;outline:none;background:#fff}
+#pin-gate button{margin-top:14px;width:100%;padding:13px;font-size:17px;border:none;border-radius:14px;background:linear-gradient(90deg,#a4133c,#d9a441);color:#fff;cursor:pointer;font-weight:bold}
+#pin-gate .err{color:#c0392b;height:20px;margin-top:10px;font-size:14px}
+#pin-gate.shake .card{animation:shk .4s}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+#pin-gate.open{opacity:0;pointer-events:none;transition:opacity .6s}
+</style>
+<div id="pin-gate"><div class="card">
+<div class="lock">🔒</div>
+<h2>Ek Surprise Hai…</h2>
+<p>Kholne ke liye PIN daalo 🎁</p>
+<input id="pin-in" type="password" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off">
+<button id="pin-btn">Khol Do ✨</button>
+<div class="err" id="pin-err"></div>
+</div></div>
+<script>
+(function(){var g=document.getElementById('pin-gate'),i=document.getElementById('pin-in'),e=document.getElementById('pin-err');
+document.body.style.overflow='hidden';
+function tryPin(){if(i.value==='1435'){g.classList.add('open');document.body.style.overflow='';setTimeout(function(){g.remove()},700);}
+else{e.textContent='Galat PIN hai, phir se try karo 💭';g.classList.remove('shake');void g.offsetWidth;g.classList.add('shake');i.value='';}}
+document.getElementById('pin-btn').addEventListener('click',tryPin);
+i.addEventListener('keydown',function(ev){if(ev.key==='Enter')tryPin()});
+i.focus();})();
+</script>
 </body>
 </html>
